@@ -11,42 +11,33 @@ export default function Table() {
   const [deleteDialog, setdeleteDialog] = useState(false);
   const [createDialog, setcreateDialog] = useState(false);
   const tableService = new TableService();
-  const StaticData = [
-    {
-      Tank: "IBC1",
-      TankShape: "Shape1",
-      Asset: "EMR-Tank1",
-      Organization: "Emerson",
-    },
-    {
-      Tank: "IBC2",
-      TankShape: "Shape2",
-      Asset: "EMR-Tank2",
-      Organization: "Rosemount",
-    },
-    {
-      Tank: "IBC3",
-      TankShape: "Shape3",
-      Asset: "EMR-Tank3",
-      Organization: "Copeland",
-    },
-  ];
-  const [tableData, setTableData] = useState(StaticData);
-  const convergetoken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMDhjOTZkOC1mMjFhLTRmMDItOWVkOC0yNTVlMzcxNzM5NDMiLCJzdWIiOiI1YTIxM2ZhYi0zYWYzLTQzZDEtOTQ0Mi0wOGRjMWQ2Y2Y1MzEiLCJlbWFpbCI6InRlc3QxQG9jdGFuLmNvbSIsImFtciI6InB3ZCIsImlhdCI6MTcwNjg0MzE1MiwidmVyIjoiMSIsInRlbmFudCI6Im9jdGFuIiwiYXBwX3JvbGUiOiJUZW5hbnQgQWRtaW4iLCJleHAiOjE3MDY4NDY3NTIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDAvYXBpL0NvbnZlcmdlT0F1dGgiLCJhdWQiOiIwb2E5N2w5NHhpM0tkS0xPNzVkNyJ9.QFL9v3v8Kij_NW0-lMCY50y1BsrzK61MsCFNqzWAxTYZihesmWRzworUGfiG_pE-gtYyLMwcuFgYf095uTJSleUffrIKsd72D3aLaJ7TKorH27uvJsNcaAaVd4TsAdzUXCizt7Zfc1huvZWO3I35b0bRM-LLyy40FlV8_CbarK66xe_PxOCKsyO9KrbfF8s8_xC8dtkI_6ufwOSsQRcdmSJhghMtwHW6u078IfluWYgZoluN5wJiehB6u9erHJ83ewh8ZaaCnC5NhnSHl7hUUgrqhB8HIiFT0oPIImN5S911sq74-X2W9OgDdhSTjdcbXM8Wgz86syicL4enRBHiDK2pXI2dec8-H9bFjlvuzkLjtEiyUInJ6KbmOC-zNcVC4MCOjuVxYx1uL7agKHyB3TVJr9lA2pg6zRG0Gg7lE4-vrz1846HWVVu2gdT_U-jGebeF8V0Yrn45jKsoHwIzrPFciLErQt9iYgoGC3jLAX9661ad7nF0Ymo_PQu4cpji'
 
+  const [tableData, setTableData] = useState();
+  const convergetoken =
+    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMDhjOTZkOC1mMjFhLTRmMDItOWVkOC0yNTVlMzcxNzM5NDMiLCJzdWIiOiI1YTIxM2ZhYi0zYWYzLTQzZDEtOTQ0Mi0wOGRjMWQ2Y2Y1MzEiLCJlbWFpbCI6InRlc3QxQG9jdGFuLmNvbSIsImFtciI6InB3ZCIsImlhdCI6MTcwNjg0MzE1MiwidmVyIjoiMSIsInRlbmFudCI6Im9jdGFuIiwiYXBwX3JvbGUiOiJUZW5hbnQgQWRtaW4iLCJleHAiOjE3MDY4NDY3NTIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDAvYXBpL0NvbnZlcmdlT0F1dGgiLCJhdWQiOiIwb2E5N2w5NHhpM0tkS0xPNzVkNyJ9.QFL9v3v8Kij_NW0-lMCY50y1BsrzK61MsCFNqzWAxTYZihesmWRzworUGfiG_pE-gtYyLMwcuFgYf095uTJSleUffrIKsd72D3aLaJ7TKorH27uvJsNcaAaVd4TsAdzUXCizt7Zfc1huvZWO3I35b0bRM-LLyy40FlV8_CbarK66xe_PxOCKsyO9KrbfF8s8_xC8dtkI_6ufwOSsQRcdmSJhghMtwHW6u078IfluWYgZoluN5wJiehB6u9erHJ83ewh8ZaaCnC5NhnSHl7hUUgrqhB8HIiFT0oPIImN5S911sq74-X2W9OgDdhSTjdcbXM8Wgz86syicL4enRBHiDK2pXI2dec8-H9bFjlvuzkLjtEiyUInJ6KbmOC-zNcVC4MCOjuVxYx1uL7agKHyB3TVJr9lA2pg6zRG0Gg7lE4-vrz1846HWVVu2gdT_U-jGebeF8V0Yrn45jKsoHwIzrPFciLErQt9iYgoGC3jLAX9661ad7nF0Ymo_PQu4cpji";
+  useEffect(() => {
+    tableService
+      .getTableDetails()
+      .then((result) => {
+        setTableData(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [createDialog]);
   //child component props
   const [formData, setFormData] = useState({
-    asset: "",
-    organization: "",
-    tank: "",
-    tankshape: "",
+    Asset: "",
+    Organization: "",
+    Tank: "",
+    Tankshape: "",
   });
 
   const [formErrors, setFormErrors] = useState({
-    asset: false,
-    organization: false,
-    tank: false,
-    tankshape: false,
+    Asset: false,
+    Organization: false,
+    Tank: false,
+    Tankshape: false,
   });
 
   const handleFormChange = (e) => {
@@ -57,11 +48,11 @@ export default function Table() {
 
   const handleFormSubmit = () => {
     const newFormErrors = {
-      asset: !formData.asset || formData.asset.trim() === "",
-      organization:
-        !formData.organization || formData.organization.trim() === "",
-      tank: !formData.tank || formData.tank.trim() === "",
-      tankshape: !formData.tankshape || formData.tankshape.trim() === "",
+      Asset: !formData.Asset || formData.Asset.trim() === "",
+      Organization:
+        !formData.Organization || formData.Organization.trim() === "",
+      Tank: !formData.Tank || formData.Tank.trim() === "",
+      Tankshape: !formData.Tankshape || formData.Tankshape.trim() === "",
     };
 
     const hasErrors = Object.values(newFormErrors).some((error) => error);
@@ -71,10 +62,18 @@ export default function Table() {
 
     if (!hasErrors) {
       // Call your create API here with formData
+      console.log(formData, "form data");
       const payloadData = {
-        data : formData,
-        token : convergetoken
-      }
+        // data : formData
+        // formData
+        // token : convergetoken
+        Asset: formData.Asset,
+        Tank: formData.Tank,
+
+        TankShape: formData.Tankshape,
+
+        Organization: formData.Organization,
+      };
       console.log(payloadData);
 
       // Assuming you have a service function named tableService.createRecord

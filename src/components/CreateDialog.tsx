@@ -40,81 +40,81 @@ function CreateDialog({
       <div className="p-grid p-dir-col p-fluid">
         <div className="p-field p-col">
           <label
-            htmlFor="asset"
+            htmlFor="Asset"
             className="p-col-fixed"
             style={{ width: "100px" }}
           >
             Asset *
           </label>
           <InputText
-            id="asset"
-            name="asset"
-            value={formData.asset || ''   }
+            id="Asset"
+            name="Asset"
+            value={formData.Asset || ''   }
             onChange={handleFormChange}
             required
-            className={formErrors?.asset ? "p-invalid" : ""}
+            className={formErrors?.Asset ? "p-invalid" : ""}
           />
-          {formErrors?.asset && (
+          {formErrors?.Asset && (
             <small className="p-error">Asset is required.</small>
           )}
         </div>
         <div className="p-field p-col">
           <label
-            htmlFor="organization"
+            htmlFor="Organization"
             className="p-col-fixed"
             style={{ width: "100px" }}
           >
             Organization *
           </label>
           <InputText
-            id="organization"
-            name="organization"
-            value={formData.organization || ''  }
+            id="Organization"
+            name="Organization"
+            value={formData.Organization || ''  }
             onChange={handleFormChange}
             required
-            className={formErrors?.organization ? "p-invalid" : ""}
+            className={formErrors?.Organization ? "p-invalid" : ""}
           />
-          {formErrors?.organization && (
+          {formErrors?.Organization && (
             <small className="p-error">Organization is required.</small>
           )}
         </div>
         <div className="p-field p-col">
           <label
-            htmlFor="tank"
+            htmlFor="Tank"
             className="p-col-fixed"
             style={{ width: "100px" }}
           >
             Tank *
           </label>
           <InputText
-            id="tank"
-            name="tank"
-            value={formData.tank || '' }
+            id="Tank"
+            name="Tank"
+            value={formData.Tank || '' }
             onChange={handleFormChange}
             required
-            className={formErrors?.tank ? "p-invalid" : ""}
+            className={formErrors?.Tank ? "p-invalid" : ""}
           />
-          {formErrors?.tank && (
+          {formErrors?.Tank && (
             <small className="p-error">Tank is required.</small>
           )}
         </div>
         <div className="p-field p-col">
           <label
-            htmlFor="tankshape"
+            htmlFor="Tankshape"
             className="p-col-fixed"
             style={{ width: "100px" }}
           >
             Tank Shape *
           </label>
           <InputText
-            id="tankshape"
-            name="tankshape"
-            value={formData.tankshape || ''  }
+            id="Tankshape"
+            name="Tankshape"
+            value={formData.Tankshape || ''  }
             onChange={handleFormChange}
             required
-            className={formErrors?.tank ? "p-invalid" : ""}
+            className={formErrors?.Tank ? "p-invalid" : ""}
           />
-          {formErrors?.tankshape && (
+          {formErrors?.Tankshape && (
             <small className="p-error">Tank Shape is required.</small>
           )}
         </div>
