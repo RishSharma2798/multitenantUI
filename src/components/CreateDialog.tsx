@@ -100,21 +100,21 @@ function CreateDialog({
         </div>
         <div className="p-field p-col">
           <label
-            htmlFor="Tankshape"
+            htmlFor="TankShape"
             className="p-col-fixed"
             style={{ width: "100px" }}
           >
             Tank Shape *
           </label>
           <InputText
-            id="Tankshape"
-            name="Tankshape"
-            value={formData.Tankshape || ''  }
+            id="TankShape"
+            name="TankShape"
+            value={formData.TankShape || ''  }
             onChange={handleFormChange}
             required
             className={formErrors?.Tank ? "p-invalid" : ""}
           />
-          {formErrors?.Tankshape && (
+          {formErrors?.TankShape && (
             <small className="p-error">Tank Shape is required.</small>
           )}
         </div>

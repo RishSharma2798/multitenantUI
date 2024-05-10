@@ -13,11 +13,14 @@ export default function Table() {
   const tableService = new TableService();
 
   const [tableData, setTableData] = useState();
-  const convergetoken =
-    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMDhjOTZkOC1mMjFhLTRmMDItOWVkOC0yNTVlMzcxNzM5NDMiLCJzdWIiOiI1YTIxM2ZhYi0zYWYzLTQzZDEtOTQ0Mi0wOGRjMWQ2Y2Y1MzEiLCJlbWFpbCI6InRlc3QxQG9jdGFuLmNvbSIsImFtciI6InB3ZCIsImlhdCI6MTcwNjg0MzE1MiwidmVyIjoiMSIsInRlbmFudCI6Im9jdGFuIiwiYXBwX3JvbGUiOiJUZW5hbnQgQWRtaW4iLCJleHAiOjE3MDY4NDY3NTIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDAvYXBpL0NvbnZlcmdlT0F1dGgiLCJhdWQiOiIwb2E5N2w5NHhpM0tkS0xPNzVkNyJ9.QFL9v3v8Kij_NW0-lMCY50y1BsrzK61MsCFNqzWAxTYZihesmWRzworUGfiG_pE-gtYyLMwcuFgYf095uTJSleUffrIKsd72D3aLaJ7TKorH27uvJsNcaAaVd4TsAdzUXCizt7Zfc1huvZWO3I35b0bRM-LLyy40FlV8_CbarK66xe_PxOCKsyO9KrbfF8s8_xC8dtkI_6ufwOSsQRcdmSJhghMtwHW6u078IfluWYgZoluN5wJiehB6u9erHJ83ewh8ZaaCnC5NhnSHl7hUUgrqhB8HIiFT0oPIImN5S911sq74-X2W9OgDdhSTjdcbXM8Wgz86syicL4enRBHiDK2pXI2dec8-H9bFjlvuzkLjtEiyUInJ6KbmOC-zNcVC4MCOjuVxYx1uL7agKHyB3TVJr9lA2pg6zRG0Gg7lE4-vrz1846HWVVu2gdT_U-jGebeF8V0Yrn45jKsoHwIzrPFciLErQt9iYgoGC3jLAX9661ad7nF0Ymo_PQu4cpji";
+  const convergetoken = {
+    //  token : "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMDhjOTZkOC1mMjFhLTRmMDItOWVkOC0yNTVlMzcxNzM5NDMiLCJzdWIiOiI1YTIxM2ZhYi0zYWYzLTQzZDEtOTQ0Mi0wOGRjMWQ2Y2Y1MzEiLCJlbWFpbCI6InRlc3QxQG9jdGFuLmNvbSIsImFtciI6InB3ZCIsImlhdCI6MTcwNjg0MzE1MiwidmVyIjoiMSIsInRlbmFudCI6Im9jdGFuIiwiYXBwX3JvbGUiOiJUZW5hbnQgQWRtaW4iLCJleHAiOjE3MDY4NDY3NTIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDAvYXBpL0NvbnZlcmdlT0F1dGgiLCJhdWQiOiIwb2E5N2w5NHhpM0tkS0xPNzVkNyJ9.QFL9v3v8Kij_NW0-lMCY50y1BsrzK61MsCFNqzWAxTYZihesmWRzworUGfiG_pE-gtYyLMwcuFgYf095uTJSleUffrIKsd72D3aLaJ7TKorH27uvJsNcaAaVd4TsAdzUXCizt7Zfc1huvZWO3I35b0bRM-LLyy40FlV8_CbarK66xe_PxOCKsyO9KrbfF8s8_xC8dtkI_6ufwOSsQRcdmSJhghMtwHW6u078IfluWYgZoluN5wJiehB6u9erHJ83ewh8ZaaCnC5NhnSHl7hUUgrqhB8HIiFT0oPIImN5S911sq74-X2W9OgDdhSTjdcbXM8Wgz86syicL4enRBHiDK2pXI2dec8-H9bFjlvuzkLjtEiyUInJ6KbmOC-zNcVC4MCOjuVxYx1uL7agKHyB3TVJr9lA2pg6zRG0Gg7lE4-vrz1846HWVVu2gdT_U-jGebeF8V0Yrn45jKsoHwIzrPFciLErQt9iYgoGC3jLAX9661ad7nF0Ymo_PQu4cpji"
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMDhjOTZkOC1mMjFhLTRmMDItOWVkOC0yNTVlMzcxNzM5NDMiLCJzdWIiOiI1YTIxM2ZhYi0zYWYzLTQzZDEtOTQ0Mi0wOGRjMWQ2Y2Y1MzEiLCJlbWFpbCI6InRlc3QxQG9jdGFuLmNvbSIsImFtciI6InB3ZCIsImlhdCI6MTcwNjg0MzE1MiwidmVyIjoiMSIsInRlbmFudCI6InRlbmFudDEiLCJhcHBfcm9sZSI6IlRlbmFudCBBZG1pbiIsImV4cCI6MTcwNjg0Njc1MiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMC9hcGkvQ29udmVyZ2VPQXV0aCIsImF1ZCI6IjBvYTk3bDk0eGkzS2RLTE83NWQ3In0.F-cEBm8s9NQR9ASdzgfydiKSuaiE-_RphDwUJU1CRJE",
+  };
   useEffect(() => {
     tableService
-      .getTableDetails()
+      .getRecord(convergetoken)
       .then((result) => {
         setTableData(result);
       })
@@ -30,14 +33,14 @@ export default function Table() {
     Asset: "",
     Organization: "",
     Tank: "",
-    Tankshape: "",
+    TankShape: "",
   });
 
   const [formErrors, setFormErrors] = useState({
     Asset: false,
     Organization: false,
     Tank: false,
-    Tankshape: false,
+    TankShape: false,
   });
 
   const handleFormChange = (e) => {
@@ -52,7 +55,7 @@ export default function Table() {
       Organization:
         !formData.Organization || formData.Organization.trim() === "",
       Tank: !formData.Tank || formData.Tank.trim() === "",
-      Tankshape: !formData.Tankshape || formData.Tankshape.trim() === "",
+      TankShape: !formData.TankShape || formData.TankShape.trim() === "",
     };
 
     const hasErrors = Object.values(newFormErrors).some((error) => error);
@@ -62,17 +65,16 @@ export default function Table() {
 
     if (!hasErrors) {
       // Call your create API here with formData
-      console.log(formData, "form data");
       const payloadData = {
-        // data : formData
-        // formData
-        // token : convergetoken
-        Asset: formData.Asset,
-        Tank: formData.Tank,
+        data: formData,
 
-        TankShape: formData.Tankshape,
+        token: convergetoken.token,
+        // Asset: formData.Asset,
+        // Tank: formData.Tank,
 
-        Organization: formData.Organization,
+        // TankShape: formData.TankShape,
+
+        // Organization: formData.Organization,
       };
       console.log(payloadData);
 
